@@ -1,0 +1,33 @@
+{
+  "context": {
+    "private": {
+      "credentials": {
+        "api_key": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    }
+  },
+  "output": {
+    "generic": [
+      {
+        "values": [
+          {
+            "text": "I'm sorry, I could not find any answer to your question. "
+          }
+        ],
+        "response_type": "text",
+        "selection_policy": "sequential"
+      }
+    ]
+  },
+  "actions": [
+    {
+      "name": "/tttt@xxxx.yyyy/ZZZZZZZZZZZZ",
+      "type": "cloud_function",
+      "parameters": {
+        "text": "<? input.text ?>"
+      },
+      "credentials": "$private.credentials",
+      "result_variable": "result"
+    }
+  ]
+}
