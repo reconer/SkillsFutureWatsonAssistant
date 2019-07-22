@@ -1,0 +1,3 @@
+PROFILE SELECT
+
+After pressing the Space Bar to enter the game, you will be asked to select or create a profile. To create a profile, select Create New and type your name. When finished, press Enter to proceed. If more than one profile exists, select your profile on this screen before entering the game. Any progress made while playing will be saved to the selected profile.
