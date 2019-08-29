@@ -1,0 +1,42 @@
+{
+  "output": {
+    "generic": [
+      {
+        "values": [
+          {
+            "text": "I'm sorry, I could not find any answer to your question. "
+          }
+        ],
+        "response_type": "text",
+        "selection_policy": "sequential"
+      }
+    ]
+  },
+  "actions": [
+    {
+      "name": "/tttt@xxxx.yyyy/ZZZZZZZZZZZZ/barn-town-discovery",
+      "type": "cloud_function",
+      "parameters": {
+        "text": "<? input.text ?>"
+      },
+      "credentials": "$private.credentials",
+      "result_variable": "result"
+    },
+    {
+      "name": "/tttt@xxxx.yyyy/ZZZZZZZZZZZZ/wikipediasearch",
+      "type": "cloud_function",
+      "parameters": {
+        "query": "<? input.text ?>"
+      },
+      "credentials": "$private.credentials",
+      "result_variable": "wikiresult"
+    }
+  ],
+  "context": {
+    "private": {
+      "credentials": {
+        "api_key": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    }
+  }
+}
