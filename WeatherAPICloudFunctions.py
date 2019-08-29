@@ -36,11 +36,10 @@ def main(dict):
 
     #the action below will get data from data.gov.sg, save it as responseData
     WeatherAPI_url = "https://twcservice.mybluemix.net/api/weather/v1/geocode/" + str(lat) + "/"  + str(long) + "/observations.json?language=en-US"
-    WeatherAPI_username = "8e8b25ae-6340-40f8-8829-d69c1431747a"
-    WeatherAPI_password = "FyXh6rLF7m"
+    WeatherAPI_username = "7d56aa43-cbfb-477b-af69-ddef282c3e6c"
+    WeatherAPI_password = "D483qR3lpr"
     response = requests.get(WeatherAPI_url, auth=(WeatherAPI_username, WeatherAPI_password))
-    obs_data = response.json()
-    obs_data = obs_data["observation"]
+
     
     #------------------------------------------------------------------------#
     # Example output from response.json() :                                  # 
@@ -62,13 +61,29 @@ def main(dict):
     #    }                                                                   #
     #------------------------------------------------------------------------# 
     
-
-    #craft our return data. the return data must be JSON
-    results = {
-        "lat" : lat,
-        "long" : long,
-        "obs_name" : obs_data["obs_name"],
-        "forecast" : obs_data["wx_phrase"]
-    }
-    
-    return results
+    try:
+        obs_data = response.json()
+        obs_data = obs_data["observation"]
+        #craft our return data. the return data must be JSON
+        results = {
+            "lat" : lat,
+            "long" : long,
+            "obs_name" : obs_data["obs_name"],
+            "forecast" : obs_data["wx_phrase"]
+        }
+        return results
+    except:
+        
+        response = requests.get('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast')
+        responseData = response.json()
+        forecastsData = responseData["items"][0]["forecasts"]
+        forecastArea = GetForecast("changi",forecastsData)        
+        
+        print("error",response)
+        results = {
+            "lat" : lat,
+            "long" : long,
+            "obs_name" : "changi",
+            "forecast" : forecastArea
+        }        
+        return results
